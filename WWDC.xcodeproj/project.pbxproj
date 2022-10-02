@@ -11,6 +11,11 @@
 		35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */; };
 		35AA0AB428E9CE7C00C4AA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */; };
 		35AA0AB728E9CE7C00C4AA6B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AB628E9CE7C00C4AA6B /* Preview Assets.xcassets */; };
+		35AA0ABF28E9CE8100C4AA6B /* WWDC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */; };
+		35AA0AC128E9CED200C4AA6B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC028E9CED200C4AA6B /* DataController.swift */; };
+		35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC228E9CEF900C4AA6B /* WebView.swift */; };
+		35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */; };
+		35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35AA0AB628E9CE7C00C4AA6B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WWDC.xcdatamodel; sourceTree = "<group>"; };
+		35AA0AC028E9CED200C4AA6B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		35AA0AC228E9CEF900C4AA6B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDCSource.txt; sourceTree = "<group>"; };
+		35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceAnalyze.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,12 @@
 			isa = PBXGroup;
 			children = (
 				35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */,
+				35AA0AC028E9CED200C4AA6B /* DataController.swift */,
+				35AA0AC228E9CEF900C4AA6B /* WebView.swift */,
 				35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */,
+				35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */,
+				35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */,
+				35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */,
 				35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */,
 				35AA0AB528E9CE7C00C4AA6B /* Preview Content */,
 			);
@@ -127,6 +142,7 @@
 			files = (
 				35AA0AB728E9CE7C00C4AA6B /* Preview Assets.xcassets in Resources */,
 				35AA0AB428E9CE7C00C4AA6B /* Assets.xcassets in Resources */,
+				35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +154,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */,
+				35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */,
+				35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */,
+				35AA0AC128E9CED200C4AA6B /* DataController.swift in Sources */,
+				35AA0ABF28E9CE8100C4AA6B /* WWDC.xcdatamodeld in Sources */,
 				35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +359,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */,
+			);
+			currentVersion = 35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */;
+			path = WWDC.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 35AA0AA428E9CE7B00C4AA6B /* Project object */;
 }

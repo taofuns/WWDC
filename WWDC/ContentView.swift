@@ -8,36 +8,53 @@
 import SwiftUI
 
 struct ContentView: View {
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]) var wwdcSessions: FetchedResults<WWDCSession>
+    
+    @State private var searchText=""
+    
+    var body: some View {
+        NavigationView {
+            VStack{
+                FetchList(filter: searchText)
+            }
+            .navigationTitle("WWDC")
+            .searchable(text: $searchText, prompt: "Search session")
+        }
+    }
+    
+}
+
+
+struct FetchList: View {
+    
+    
+    @FetchRequest var wwdcSessions: FetchedResults<WWDCSession>
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
-        VStack{
-            List(wwdcSessions) {wwdcSession in
-                VStack(alignment: .leading){
-                    HStack(alignment: .bottom,spacing: 3) {
-                        Text("\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")")
-                        if wwdcSession.preferURL != nil {
-                            Image(systemName: "play.circle")
-                        }
-                        if wwdcSession.pdfURL != nil {
-                            Image(systemName: "doc.circle")
-                        }
+        List(wwdcSessions) {wwdcSession in
+            VStack(alignment: .leading){
+                HStack(alignment: .bottom,spacing: 3) {
+                    Text("\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")")
+                    if wwdcSession.preferURL != nil {
+                        Image(systemName: "play.circle")
                     }
-                    .font(.caption)
-                    Text(wwdcSession.name ?? "unkown")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                }
-                .onTapGesture {
-                    if let preferURL = wwdcSession.preferURL, let url = URL(string: preferURL) {
-                        UIApplication.shared.open(url)
+                    if wwdcSession.pdfURL != nil {
+                        Image(systemName: "doc.circle")
                     }
                 }
-                .onLongPressGesture {
-                    if let pdfURL = wwdcSession.pdfURL, let url = URL(string: pdfURL) {
-                        UIApplication.shared.open(url)
-                    }
+                .font(.caption)
+                Text(wwdcSession.name ?? "unkown")
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+            .onTapGesture {
+                if let preferURL = wwdcSession.preferURL, let url = URL(string: preferURL) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            .onLongPressGesture {
+                if let pdfURL = wwdcSession.pdfURL, let url = URL(string: pdfURL) {
+                    UIApplication.shared.open(url)
                 }
             }
         }
@@ -46,9 +63,7 @@ struct ContentView: View {
                 getData()
             }
         }
-        
     }
-    
     
     func getData(){
         do {
@@ -69,13 +84,19 @@ struct ContentView: View {
             print("Unexpected error: \(error)")
         }
     }
+    
+    init(filter: String) {
+        if filter.isEmpty {
+            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+        } else {
+            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
-        
         ContentView()
-//            .environment(\.managedObjectContext, dataController.container.viewContext)
     }
 }

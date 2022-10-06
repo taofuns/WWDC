@@ -9,24 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var searchText=""
+    @State private var searchText = ""
+    @State private var selectedYear = ""
+    
     
     var body: some View {
         NavigationView {
             VStack{
-                FetchList(filter: searchText)
+                ResultList(filter: searchText,year: selectedYear)
             }
-            .navigationTitle("WWDC")
-            .searchable(text: $searchText, prompt: "Search session")
+            .toolbar{
+                YearList(selectedYear: $selectedYear)
+            }
+            .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
+            .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
         }
     }
     
 }
 
+struct YearList: View {
+    @Binding var selectedYear: String
+    let yearList = ["","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009"]
+    var body: some View {
+        HStack(spacing:0) {
+            Picker("Year", selection: $selectedYear) {
+                ForEach(yearList,id: \.self) { year in
+                    Text(year != "" ? year : "All Year")
+                }
+                
+            }
+        }
+        
+        
+    }
+}
 
-struct FetchList: View {
-    
-    
+struct ResultList: View {
+
     @FetchRequest var wwdcSessions: FetchedResults<WWDCSession>
     @Environment(\.managedObjectContext) var moc
     
@@ -85,11 +105,20 @@ struct FetchList: View {
         }
     }
     
-    init(filter: String) {
-        if filter.isEmpty {
-            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+    init(filter: String, year: String) {
+        if year.isEmpty {
+            if filter.isEmpty {
+                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+            } else {
+                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+            }
         } else {
-            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+            if filter.isEmpty {
+                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "year == %@", year))
+            } else {
+                let filterPro = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "name CONTAINS[cd] %@", filter),NSPredicate(format: "year == %@", year)])
+                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: filterPro)
+            }
         }
     }
 }

@@ -43,36 +43,33 @@ struct YearList: View {
     }
 }
 
+
 struct ResultList: View {
 
     @FetchRequest var wwdcSessions: FetchedResults<WWDCSession>
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
-        List(wwdcSessions) {wwdcSession in
-            VStack(alignment: .leading){
-                HStack(alignment: .bottom,spacing: 3) {
-                    Text("\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")")
-                    if wwdcSession.preferURL != nil {
-                        Image(systemName: "play.circle")
+        List(wwdcSessions) {wwdcSession in 
+            NavigationLink {
+                DetiailView(session: wwdcSession)
+                    .navigationTitle(wwdcSession.name ?? "unknown")
+                    .navigationBarTitleDisplayMode(.inline)
+            } label: {
+                VStack(alignment: .leading){
+                    HStack(alignment: .bottom,spacing: 3) {
+                        Text("\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")")
+                        if wwdcSession.preferURL != nil {
+                            Image(systemName: "play.circle")
+                        }
+                        if wwdcSession.pdfURL != nil {
+                            Image(systemName: "doc.circle")
+                        }
                     }
-                    if wwdcSession.pdfURL != nil {
-                        Image(systemName: "doc.circle")
-                    }
-                }
-                .font(.caption)
-                Text(wwdcSession.name ?? "unkown")
-                    .font(.title3)
-                    .fontWeight(.bold)
-            }
-            .onTapGesture {
-                if let preferURL = wwdcSession.preferURL, let url = URL(string: preferURL) {
-                    UIApplication.shared.open(url)
-                }
-            }
-            .onLongPressGesture {
-                if let pdfURL = wwdcSession.pdfURL, let url = URL(string: pdfURL) {
-                    UIApplication.shared.open(url)
+                    .font(.caption)
+                    Text(wwdcSession.name ?? "unkown")
+                        .font(.title3)
+                        .fontWeight(.bold)
                 }
             }
         }

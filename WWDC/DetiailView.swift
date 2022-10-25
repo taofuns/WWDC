@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DetiailView: View {
     var session: FetchedResults<WWDCSession>.Element
-    @State var currentPage = "VIDEO"
+    @State var currentPage = "PDF"
     
     var body: some View {
         
         VStack{
             if session.pdfURL != nil {
                 Picker("", selection: $currentPage) {
-                    ForEach(["VIDEO","PDF"],id: \.self) {
+                    ForEach(["PDF","VIDEO"],id: \.self) {
                         Text($0)
                     }
                 }.pickerStyle(.segmented)

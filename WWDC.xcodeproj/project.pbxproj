@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		353A7D5628EA0D0E0009BC7A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 353A7D5528EA0D0E0009BC7A /* README.md */; };
 		358DC1C328EF304000CB03A9 /* DetiailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358DC1C228EF304000CB03A9 /* DetiailView.swift */; };
 		35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */; };
 		35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */; };
@@ -21,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		353A7D5528EA0D0E0009BC7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		353A7D5528EA0D0E0009BC7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		358DC1C228EF304000CB03A9 /* DetiailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetiailView.swift; sourceTree = "<group>"; };
 		35AA0AAC28E9CE7B00C4AA6B /* WWDC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WWDC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCApp.swift; sourceTree = "<group>"; };
@@ -148,7 +147,6 @@
 			files = (
 				35AA0AB728E9CE7C00C4AA6B /* Preview Assets.xcassets in Resources */,
 				35AA0AB428E9CE7C00C4AA6B /* Assets.xcassets in Resources */,
-				353A7D5628EA0D0E0009BC7A /* README.md in Resources */,
 				35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

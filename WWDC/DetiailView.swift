@@ -21,6 +21,7 @@ struct DetiailView: View {
                     }
                 }.pickerStyle(.segmented)
             }
+            
             if currentPage == "VIDEO" {
                 if let videoUrl = session.preferURL, let url = URL(string: videoUrl) {
                     WebView(url: url)
@@ -29,6 +30,11 @@ struct DetiailView: View {
                 if let pdfUrl = session.pdfURL, let url = URL(string: pdfUrl) {
                     WebView(url: url)
                 }
+            }
+        }
+        .onAppear {
+            if session.pdfURL == nil {
+                currentPage = "VIDEO"
             }
         }
     }

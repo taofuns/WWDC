@@ -54,7 +54,9 @@ struct ResultList: View {
             NavigationLink {
                 DetiailView(session: wwdcSession)
                     .navigationTitle(wwdcSession.name ?? "unknown")
+                #if os(iOS)
                     .navigationBarTitleDisplayMode(.inline)
+                #endif
             } label: {
                 VStack(alignment: .leading){
                     HStack(alignment: .bottom,spacing: 3) {

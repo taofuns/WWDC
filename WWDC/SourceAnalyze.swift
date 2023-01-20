@@ -31,6 +31,8 @@ struct SourceAnalyze {
     static let regexOld = /- Session (?<number>\d+) · (?<name>[^\[]*)(?:(?=\[hd\])\[hd\]\((?<hdURL>.*?)(?=(?:\)\s\|\s\[sd)|(?:\)\s\|\s\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?=\[sd\])\[sd\]\((?<sdURL>.*?)(?=(?:\)\s*\|\s*\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?:(?=\[pdf\])\[pdf\]\((?<pdfURL>.*?)(?=\)))*\))*/
     
     static let regexNew = /- Session (?<number>\d+) · (?<name>[^\[]*)(?:(?=\[sd\])\[sd\]\((?<sdURL>.*?)(?=(?:\)\s\|\s\[hd)|(?:\)\s\|\s\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?=\[hd\])\[hd\]\((?<hdURL>.*?)(?=(?:\)\s*\|\s*\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?:(?=\[pdf\])\[pdf\]\((?<pdfURL>.*?)(?=\)))*\))*/
+
+    static let regexNew2 = /(?<sdURL>http.*\n)\s+out=\[\d+]\s+\[Session\s+(?<number>\d+)\]\s(?<name>.*)\n/
     
     static let regexToFindYear = /# WWDC (?<year>\d{4})/
     
@@ -49,7 +51,8 @@ struct SourceAnalyze {
             guard let matchedYear = content.firstMatch(of: regexToFindYear)?.year else {
                 throw SourceAnalyzeError.noMatchedYear
             }
-            
+
+
             if ["2009","2010","2011","2012","2013","2014"].contains(matchedYear) {
                 let matches = content.matches(of: regexOld)
                 
@@ -77,7 +80,7 @@ struct SourceAnalyze {
                     let session = WWDCSession(id: id, year: year, number: number, name: name,hdURL: hdURL,sdURL: sdURL,pdfURL: pdfURL)
                     sessions.append(session)
                 }
-            } else {
+            } else if ["2015","2016","2017","2018","2019","2020","2021"].contains(matchedYear) {
                 let matches = content.matches(of: regexNew)
                 
                 for m in matches {
@@ -101,6 +104,24 @@ struct SourceAnalyze {
                         pdfURL = String(mpdfURL)
                     }
                     
+                    let session = WWDCSession(id: id, year: year, number: number, name: name,hdURL: hdURL,sdURL: sdURL,pdfURL: pdfURL)
+                    sessions.append(session)
+                }
+            } else {
+                let matches = content.matches(of: regexNew2)
+
+                for m in matches {
+                    let id = UUID()
+                    let year = String(matchedYear)
+                    let name = String(m.name)
+                    let number = String(m.number)
+                    let hdURL: String? = nil
+                    var sdURL: String? = nil
+                    let pdfURL: String? = nil
+
+                    sdURL = String(m.sdURL)
+
+
                     let session = WWDCSession(id: id, year: year, number: number, name: name,hdURL: hdURL,sdURL: sdURL,pdfURL: pdfURL)
                     sessions.append(session)
                 }

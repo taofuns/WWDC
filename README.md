@@ -2,7 +2,7 @@
 
 ## What's this
 
-**This is an app try to help u find more wwdc sessions than the offical Develper app.
+**From WWDC2007 to WWDC2022, This is an app try to help u find more wwdc sessions than the offical Develper app.**
 
 
 ## Why build this

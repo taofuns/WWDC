@@ -32,7 +32,7 @@ struct SourceAnalyze {
     
     static let regexNew = /- Session (?<number>\d+) · (?<name>[^\[]*)(?:(?=\[sd\])\[sd\]\((?<sdURL>.*?)(?=(?:\)\s\|\s\[hd)|(?:\)\s\|\s\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?=\[hd\])\[hd\]\((?<hdURL>.*?)(?=(?:\)\s*\|\s*\[pdf)|(?:\)))\))*(?:\s*\|\s*)*(?:(?:(?=\[pdf\])\[pdf\]\((?<pdfURL>.*?)(?=\)))*\))*/
 
-    static let regexNew2 = /(?<sdURL>http.*\n)\s+out=\[\d+]\s+\[Session\s+(?<number>\d+)\]\s(?<name>.*)\n/
+    static let regexNew2 = /(?<sdURL>http.*)\n\s+out=\[\d+]\s+\[Session\s+(?<number>\d+)\]\s(?<name>.*)\n/
     
     static let regexToFindYear = /# WWDC (?<year>\d{4})/
     

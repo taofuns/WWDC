@@ -1,8 +1,11 @@
 # Are u Searching Previous WWDC?
+![ScreenShot](https://obsidian-1305666858.cos.ap-nanjing.myqcloud.com/202301210350346.PNG)
 
 ## What's this
 
 **From WWDC2007 to WWDC2022, This is an app try to help u find more wwdc sessions than the offical Develper app.**
+
+Including the PDF and VIDEO.
 
 
 ## Why build this

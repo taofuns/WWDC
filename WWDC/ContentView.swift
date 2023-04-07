@@ -74,6 +74,9 @@ struct ResultList: View {
                         .fontWeight(.bold)
                 }
             }
+            .onAppear {
+                print("wwdc\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")\(wwdcSession.name ?? "unkonow")")
+            }
         }
         .onAppear{
             if wwdcSessions.isEmpty {

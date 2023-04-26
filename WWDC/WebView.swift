@@ -37,9 +37,10 @@ struct WebView: NSViewRepresentable {
 
     func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
-
+        let webview = WKWebView(frame: .zero, configuration: config)
+        webview.allowsMagnification = true
         
-        return WKWebView(frame: .zero, configuration: config)
+        return webview
     }
 
     func updateNSView(_ webView: WKWebView, context: Context) {

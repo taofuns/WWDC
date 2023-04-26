@@ -73,6 +73,9 @@ struct ResultList: View {
                 VStack(alignment: .leading){
                     HStack(alignment: .bottom,spacing: 3) {
                         Text("\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")")
+                        if wwdcSession.isStared == true {
+                            Image(systemName: "star.fill")
+                        }
                         if wwdcSession.preferURL != nil {
                             Image(systemName: "play.circle")
                         }
@@ -82,14 +85,16 @@ struct ResultList: View {
                     }
                     .font(.caption)
                     Text(wwdcSession.name ?? "unkown")
-                        .font(.title3)
+                        .font(.title2)
                         .fontWeight(.bold)
+                        .lineLimit(5)
                 }
             }
             .onAppear {
                 print("wwdc\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")\(wwdcSession.name ?? "unkonow")")
             }
         }
+
         .onAppear{
             if wwdcSessions.isEmpty {
                 getData()

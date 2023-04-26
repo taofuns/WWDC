@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+
 struct DetiailView: View {
     var session: FetchedResults<WWDCSession>.Element
     @State var currentPage = "PDF"
+    @Environment(\.openURL) var openURL
+    @Environment(\.managedObjectContext) var moc
+    
     
     var body: some View {
         
@@ -32,6 +36,32 @@ struct DetiailView: View {
                 }
             }
         }
+        .toolbar(content: {
+            if let videoUrl = session.preferURL{
+                ToolbarItem(placement: .automatic) {
+                    Image(systemName: "rectangle.stack.badge.play")
+                        .onTapGesture {
+                            openURL(URL(string: videoUrl)!)
+                        }
+                }
+            }
+            if let pdfUrl = session.pdfURL {
+                ToolbarItem(placement: .automatic) {
+                    Image(systemName: "newspaper")
+                        .onTapGesture {
+                            openURL(URL(string: pdfUrl)!)
+                        }
+                }
+            }
+            ToolbarItem(placement: .automatic) {
+                Image(systemName: session.isStared ? "star.fill" : "star")
+                    .onTapGesture {
+                        session.isStared.toggle()
+                        try? moc.save()
+                    }
+            }
+
+        })
         .onAppear {
             if session.pdfURL == nil {
                 currentPage = "VIDEO"

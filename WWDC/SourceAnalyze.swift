@@ -26,6 +26,7 @@ struct SourceAnalyze {
                 return sdURL
             }
         }
+        var isStared = false
     }
     
     static let source = Bundle.main.url(forResource: "WWDCSource", withExtension: "txt")!

@@ -11,15 +11,27 @@ struct ContentView: View {
     
     @State private var searchText = ""
     @State private var selectedYear = ""
+    @State private var showStared = false
     
     
     var body: some View {
         NavigationView {
             VStack{
-                ResultList(filter: searchText,year: selectedYear)
+                ResultList(filter: searchText,year: selectedYear,showStared: $showStared)
             }
             .toolbar{
-                YearList(selectedYear: $selectedYear)
+                ToolbarItem(placement: .automatic) {
+                    YearList(selectedYear: $selectedYear)
+
+                }
+
+                ToolbarItem(placement: .automatic) {
+                    Image(systemName: showStared ? "star.fill" : "star")
+                        .onTapGesture {
+                            showStared.toggle()
+                        }
+
+                }
             }
             .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
             .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
@@ -105,21 +117,27 @@ struct ResultList: View {
         }
     }
     
-    init(filter: String, year: String) {
-        if year.isEmpty {
-            if filter.isEmpty {
-                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
-            } else {
-                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
-            }
+    init(filter: String, year: String,showStared:Binding<Bool>) {
+        if showStared.wrappedValue {
+            //TODO: if no started, this will crash
+            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "isStared == %@", NSNumber(value: true)) )
         } else {
-            if filter.isEmpty {
-                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "year == %@", year))
+            if year.isEmpty {
+                if filter.isEmpty {
+                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+                } else {
+                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+                }
             } else {
-                let filterPro = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "name CONTAINS[cd] %@", filter),NSPredicate(format: "year == %@", year)])
-                _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: filterPro)
+                if filter.isEmpty {
+                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "year == %@", year))
+                } else {
+                    let filterPro = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "name CONTAINS[cd] %@", filter),NSPredicate(format: "year == %@", year)])
+                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: filterPro)
+                }
             }
         }
+
     }
 }
 

@@ -13,7 +13,8 @@ struct DetiailView: View {
     @State var currentPage = "PDF"
     @Environment(\.openURL) var openURL
     @Environment(\.managedObjectContext) var moc
-    
+    @State var thisStar = false
+
     
     var body: some View {
         
@@ -54,15 +55,18 @@ struct DetiailView: View {
                 }
             }
             ToolbarItem(placement: .automatic) {
-                Image(systemName: session.isStared ? "star.fill" : "star")
+                Image(systemName: thisStar ? "star.fill" : "star")
                     .onTapGesture {
                         session.isStared.toggle()
                         try? moc.save()
+                        thisStar = session.isStared
+
                     }
             }
 
         })
         .onAppear {
+            thisStar = session.isStared
             if session.pdfURL == nil {
                 currentPage = "VIDEO"
             }

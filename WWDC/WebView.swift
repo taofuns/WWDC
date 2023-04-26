@@ -37,6 +37,7 @@ struct WebView: NSViewRepresentable {
 
     func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
+
         
         return WKWebView(frame: .zero, configuration: config)
     }

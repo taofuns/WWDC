@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var selectedYear = ""
     @State private var showStared = false
-    
+    @State private var showSetting = false
     
     var body: some View {
         NavigationView {
@@ -20,6 +20,13 @@ struct ContentView: View {
                 ResultList(filter: searchText,year: selectedYear,showStared: $showStared)
             }
             .toolbar{
+                ToolbarItem(placement: .automatic) {
+                    Image(systemName: "gear")
+                        .onTapGesture {
+                            showSetting.toggle()
+                        }
+
+                }
                 ToolbarItem(placement: .automatic) {
                     YearList(selectedYear: $selectedYear)
 
@@ -32,9 +39,13 @@ struct ContentView: View {
                         }
 
                 }
+
             }
             .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
             .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
+            .sheet(isPresented: $showSetting) {
+                AppSettingsView()
+            }
         }
     }
     

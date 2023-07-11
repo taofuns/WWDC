@@ -53,7 +53,7 @@ struct ContentView: View {
 
 struct YearList: View {
     @Binding var selectedYear: String
-    let yearList = ["","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007"]
+    let yearList = ["","2023","2022","2021","2020","2019","2018","2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007"]
     var body: some View {
         HStack(spacing:0) {
             Picker("Year", selection: $selectedYear) {
@@ -110,6 +110,11 @@ struct ResultList: View {
             if wwdcSessions.isEmpty {
                 getData()
             }
+//            for wwdcSession in wwdcSessions {
+//                moc.delete(wwdcSession)
+//                try? moc.save()
+//            }
+//            getData()
         }
     }
     

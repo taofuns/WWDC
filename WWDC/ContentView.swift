@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     
@@ -69,9 +70,9 @@ struct YearList: View {
 
 struct ResultList: View {
 
-    @FetchRequest var wwdcSessions: FetchedResults<WWDCSession>
-    @Environment(\.managedObjectContext) var moc
-    
+    @Query var wwdcSessions: [WWDCSession]
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
         List(wwdcSessions) {wwdcSession in 
             NavigationLink {
@@ -111,8 +112,7 @@ struct ResultList: View {
 //                getData()
 //            }
             for wwdcSession in wwdcSessions {
-                moc.delete(wwdcSession)
-                try? moc.save()
+                modelContext.delete(object: wwdcSession)
             }
             getData()
         }
@@ -122,8 +122,8 @@ struct ResultList: View {
         do {
             let sessions = try SourceAnalyze.getData(fromSource: SourceAnalyze.source)
             for session in sessions {
-                let wwdcSession = WWDCSession(context: moc)
-                wwdcSession.id = session.id
+                let wwdcSession = WWDCSession()
+                wwdcSession.idc = session.id
                 wwdcSession.year = session.year
                 wwdcSession.number = session.number
                 wwdcSession.name = session.name
@@ -131,7 +131,7 @@ struct ResultList: View {
                 wwdcSession.hdURL = session.hdURL
                 wwdcSession.pdfURL = session.pdfURL
                 wwdcSession.preferURL = session.preferURL
-                try? moc.save()
+                modelContext.insert(object: wwdcSession)
             }
         } catch {
             print("Unexpected error: \(error)")
@@ -139,22 +139,57 @@ struct ResultList: View {
     }
     
     init(filter: String, year: String,showStared:Binding<Bool>) {
+        
+//        let sortDescriptor:SortDescriptor<WWDCSession> = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
         if showStared.wrappedValue {
             //TODO: if no started, this will crash
-            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "isStared == %@", NSNumber(value: true)) )
+//            _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "isStared == %@", NSNumber(value: true)) )
+            let predicate = #Predicate<WWDCSession> { session in
+                session.isStared == true
+            }
+            var queryDescriptor = FetchDescriptor<WWDCSession>()
+            queryDescriptor.predicate = predicate
+            queryDescriptor.sortBy = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
+            _wwdcSessions = Query(queryDescriptor)
+
         } else {
             if year.isEmpty {
                 if filter.isEmpty {
-                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+//                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)])
+                    var queryDescriptor = FetchDescriptor<WWDCSession>()
+                    queryDescriptor.sortBy = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
+                    _wwdcSessions = Query(queryDescriptor)
                 } else {
-                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+//                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "name CONTAINS[cd] %@", filter))
+                    let predicate = #Predicate<WWDCSession> { session in
+                        session.name?.contains(filter) ?? false
+                    }
+                    var queryDescriptor = FetchDescriptor<WWDCSession>()
+                    queryDescriptor.predicate = predicate
+                    queryDescriptor.sortBy = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
+                    _wwdcSessions = Query(queryDescriptor)
+
                 }
             } else {
                 if filter.isEmpty {
-                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "year == %@", year))
+//                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: NSPredicate(format: "year == %@", year))
+                    let predicate = #Predicate<WWDCSession> { session in
+                        session.year == year
+                    }
+                    var queryDescriptor = FetchDescriptor<WWDCSession>()
+                    queryDescriptor.predicate = predicate
+                    queryDescriptor.sortBy = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
+                    _wwdcSessions = Query(queryDescriptor)
                 } else {
-                    let filterPro = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "name CONTAINS[cd] %@", filter),NSPredicate(format: "year == %@", year)])
-                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: filterPro)
+//                    let filterPro = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "name CONTAINS[cd] %@", filter),NSPredicate(format: "year == %@", year)])
+//                    _wwdcSessions = FetchRequest<WWDCSession>(sortDescriptors: [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)],predicate: filterPro)
+                    let predicate = #Predicate<WWDCSession> { session in
+                        (session.name?.contains(filter) ?? false) && (session.year == year)
+                    }
+                    var queryDescriptor = FetchDescriptor<WWDCSession>()
+                    queryDescriptor.predicate = predicate
+                    queryDescriptor.sortBy = [SortDescriptor(\.year,order:.reverse),SortDescriptor(\.number)]
+                    _wwdcSessions = Query(queryDescriptor)
                 }
             }
         }
@@ -166,6 +201,6 @@ struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, DataController().container.viewContext)
+            .modelContainer(for: WWDCSession.self)
     }
 }

@@ -13,12 +13,12 @@
 		35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */; };
 		35AA0AB428E9CE7C00C4AA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */; };
 		35AA0AB728E9CE7C00C4AA6B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AB628E9CE7C00C4AA6B /* Preview Assets.xcassets */; };
-		35AA0ABF28E9CE8100C4AA6B /* WWDC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */; };
-		35AA0AC128E9CED200C4AA6B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC028E9CED200C4AA6B /* DataController.swift */; };
 		35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC228E9CEF900C4AA6B /* WebView.swift */; };
 		35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */; };
 		35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */; };
 		35B6AEA829F9BC2E0053693E /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */; };
+		35FBAB772A5DE5F90093E2A6 /* WWDCCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */; };
+		35FBAB782A5DE5F90093E2A6 /* WWDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,12 +31,12 @@
 		35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35AA0AB628E9CE7C00C4AA6B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WWDC.xcdatamodel; sourceTree = "<group>"; };
-		35AA0AC028E9CED200C4AA6B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		35AA0AC228E9CEF900C4AA6B /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDCSource.txt; sourceTree = "<group>"; };
 		35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceAnalyze.swift; sourceTree = "<group>"; };
 		35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
+		35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCCollection.swift; sourceTree = SOURCE_ROOT; };
+		35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCSession.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,15 +79,14 @@
 		35AA0AAE28E9CE7B00C4AA6B /* WWDC */ = {
 			isa = PBXGroup;
 			children = (
-				359956D3290ECC6D0050A9D3 /* WWDC.entitlements */,
 				35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */,
+				35FBAB742A5DE5C40093E2A6 /* Model */,
+				359956D3290ECC6D0050A9D3 /* WWDC.entitlements */,
 				35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */,
 				358DC1C228EF304000CB03A9 /* DetiailView.swift */,
 				35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */,
 				35AA0AC228E9CEF900C4AA6B /* WebView.swift */,
 				35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */,
-				35AA0AC028E9CED200C4AA6B /* DataController.swift */,
-				35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */,
 				35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */,
 				35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */,
 				35AA0AB528E9CE7C00C4AA6B /* Preview Content */,
@@ -101,6 +100,15 @@
 				35AA0AB628E9CE7C00C4AA6B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		35FBAB742A5DE5C40093E2A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */,
+				35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,8 +187,8 @@
 				35B6AEA829F9BC2E0053693E /* AppSettingsView.swift in Sources */,
 				35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */,
 				35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */,
-				35AA0AC128E9CED200C4AA6B /* DataController.swift in Sources */,
-				35AA0ABF28E9CE8100C4AA6B /* WWDC.xcdatamodeld in Sources */,
+				35FBAB772A5DE5F90093E2A6 /* WWDCCollection.swift in Sources */,
+				35FBAB782A5DE5F90093E2A6 /* WWDCSession.swift in Sources */,
 				35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */,
 				358DC1C328EF304000CB03A9 /* DetiailView.swift in Sources */,
 			);
@@ -323,12 +331,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.leon.WWDC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -361,12 +369,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.leon.WWDC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,19 +409,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		35AA0ABD28E9CE8100C4AA6B /* WWDC.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */,
-			);
-			currentVersion = 35AA0ABE28E9CE8100C4AA6B /* WWDC.xcdatamodel */;
-			path = WWDC.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 35AA0AA428E9CE7B00C4AA6B /* Project object */;
 }

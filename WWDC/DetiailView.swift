@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 
 struct DetiailView: View {
-    var session: FetchedResults<WWDCSession>.Element
+    @Bindable var session: WWDCSession
     @State var currentPage = "PDF"
     @Environment(\.openURL) var openURL
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.modelContext) private var modelContext
     @State var thisStar = false
 
     
@@ -43,9 +44,9 @@ struct DetiailView: View {
             ToolbarItem(placement: .navigation) {
                 Image(systemName: thisStar ? "star.fill" : "star")
                     .onTapGesture {
-                        session.isStared.toggle()
-                        try? moc.save()
-                        thisStar = session.isStared
+                        session.isStared?.toggle()
+                        try? modelContext.save()
+                        thisStar = session.isStared!
 
                     }
             }
@@ -82,7 +83,9 @@ struct DetiailView: View {
 
         })
         .onAppear {
-            thisStar = session.isStared
+            if let isStared = session.isStared {
+                thisStar = isStared
+            }
             if session.pdfURL == nil {
                 currentPage = "VIDEO"
             }

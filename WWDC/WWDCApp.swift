@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 //#if os(macOS)
 
 @main
 struct WWDCApp: App {
-    @StateObject private var dataController = DataController()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .modelContainer(for: WWDCSession.self)
         }
     }
 }

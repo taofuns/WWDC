@@ -107,14 +107,14 @@ struct ResultList: View {
         }
 
         .onAppear{
-            if wwdcSessions.isEmpty {
-                getData()
-            }
-//            for wwdcSession in wwdcSessions {
-//                moc.delete(wwdcSession)
-//                try? moc.save()
+//            if wwdcSessions.isEmpty {
+//                getData()
 //            }
-//            getData()
+            for wwdcSession in wwdcSessions {
+                moc.delete(wwdcSession)
+                try? moc.save()
+            }
+            getData()
         }
     }
     

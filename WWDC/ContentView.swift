@@ -99,6 +99,11 @@ struct ResultList: View {
             if wwdcSessions.isEmpty {
                 getData()
             }
+//            for wwdcSession in wwdcSessions {
+//                moc.delete(wwdcSession)
+//                try? moc.save()
+//            }
+//            getData()
         }
     }
     

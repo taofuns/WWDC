@@ -8,8 +8,6 @@
 import Foundation
 
 
-
-
 struct SourceAnalyze {
     struct WWDCSession {
         var id: UUID

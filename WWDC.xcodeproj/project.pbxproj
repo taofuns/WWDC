@@ -17,7 +17,6 @@
 		35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */; };
 		35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */; };
 		35B6AEA829F9BC2E0053693E /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */; };
-		35FBAB772A5DE5F90093E2A6 /* WWDCCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */; };
 		35FBAB782A5DE5F90093E2A6 /* WWDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDCSource.txt; sourceTree = "<group>"; };
 		35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceAnalyze.swift; sourceTree = "<group>"; };
 		35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
-		35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCCollection.swift; sourceTree = SOURCE_ROOT; };
 		35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCSession.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -105,7 +103,6 @@
 		35FBAB742A5DE5C40093E2A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				35FBAB752A5DE5F90093E2A6 /* WWDCCollection.swift */,
 				35FBAB762A5DE5F90093E2A6 /* WWDCSession.swift */,
 			);
 			path = Model;
@@ -187,7 +184,6 @@
 				35B6AEA829F9BC2E0053693E /* AppSettingsView.swift in Sources */,
 				35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */,
 				35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */,
-				35FBAB772A5DE5F90093E2A6 /* WWDCCollection.swift in Sources */,
 				35FBAB782A5DE5F90093E2A6 /* WWDCSession.swift in Sources */,
 				35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */,
 				358DC1C328EF304000CB03A9 /* DetiailView.swift in Sources */,

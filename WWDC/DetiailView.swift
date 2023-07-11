@@ -17,8 +17,6 @@ struct DetiailView: View {
     @State var thisStar = false
 
     
-
-    
     var body: some View {
         
         VStack{
@@ -69,7 +67,7 @@ struct DetiailView: View {
                     Image(systemName: "square.and.arrow.down")
                         .onTapGesture {
                             if let folderData = UserDefaults.standard.data(forKey: "defaultDownloadFolder"),
-                               let folderURL = try? URL(dataRepresentation: folderData, relativeTo: nil) {
+                               let folderURL = URL(dataRepresentation: folderData, relativeTo: nil) {
                                 downloadFile(from: videoUrl, to: folderURL,filename: session.name!,year: session.year!)
                             } else {
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3587C2EE297B290500A63DCA /* ScreenShot.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3587C2ED297B290500A63DCA /* ScreenShot.PNG */; };
 		358DC1C328EF304000CB03A9 /* DetiailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358DC1C228EF304000CB03A9 /* DetiailView.swift */; };
 		35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */; };
 		35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		353A7D5528EA0D0E0009BC7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
+		3587C2ED297B290500A63DCA /* ScreenShot.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot.PNG; sourceTree = "<group>"; };
 		358DC1C228EF304000CB03A9 /* DetiailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetiailView.swift; sourceTree = "<group>"; };
 		359956D3290ECC6D0050A9D3 /* WWDC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWDC.entitlements; sourceTree = "<group>"; };
 		35AA0AAC28E9CE7B00C4AA6B /* WWDC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WWDC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,11 +50,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3587C2EC297B28D500A63DCA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				3587C2ED297B290500A63DCA /* ScreenShot.PNG */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		35AA0AA328E9CE7B00C4AA6B = {
 			isa = PBXGroup;
 			children = (
 				353A7D5528EA0D0E0009BC7A /* README.md */,
 				35AA0AAE28E9CE7B00C4AA6B /* WWDC */,
+				3587C2EC297B28D500A63DCA /* Resource */,
 				35AA0AAD28E9CE7B00C4AA6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,6 +164,7 @@
 				35AA0AB728E9CE7C00C4AA6B /* Preview Assets.xcassets in Resources */,
 				35AA0AB428E9CE7C00C4AA6B /* Assets.xcassets in Resources */,
 				35AA0AC528E9CFA400C4AA6B /* WWDCSource.txt in Resources */,
+				3587C2EE297B290500A63DCA /* ScreenShot.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

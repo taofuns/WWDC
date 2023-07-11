@@ -1,8 +1,11 @@
 # Are u Searching Previous WWDC?
+![ScreenShot](Resource/ScreenShot.PNG)
 
 ## What's this
 
-**This is an app try to help u find more wwdc sessions than the offical Develper app.
+**From WWDC2007 to WWDC2022, This is an app try to help u find more wwdc sessions than the offical Develper app.**
+
+Including the PDF and VIDEO.
 
 
 ## Why build this

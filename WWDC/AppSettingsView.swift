@@ -42,10 +42,11 @@ struct AppSettingsView: View {
     }
 
 }
-#endif
+
 
 struct AppSettingView_Previews: PreviewProvider {
     static var previews: some View {
         AppSettingsView()
     }
 }
+#endif

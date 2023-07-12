@@ -39,9 +39,11 @@ struct ContentView: View {
             }
             .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
             .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
+            #if os(macOS)
             .sheet(isPresented: $showSetting) {
                 AppSettingsView()
             }
+            #endif
         }
     }
 }

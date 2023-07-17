@@ -12,7 +12,7 @@ import SwiftData
 
 @Model public class WWDCSession {
     var hdURL: String?
-    var idc: UUID? // when migrating from CoreData to SwiftData, can't use `id` any more
+    @Attribute(.unique) var idc: UUID? // when migrating from CoreData to SwiftData, can't use `id` any more
     var isStared: Bool?
     var name: String?
     var number: String?

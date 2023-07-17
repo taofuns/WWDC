@@ -170,10 +170,21 @@ struct ResultList: View {
         _wwdcSessions = Query(queryDescriptor)
     }
 }
+//
+// #Preview {
+////    MainActor.assumeIsolated {
+//        ContentView()
+//            .modelContainer(for: WWDCSession.self)
+//    }
+//}
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .modelContainer(for: WWDCSession.self)
-    }
-}
+//#Preview {
+//    MainActor.assumeIsolated {
+//        let container = try! ModelContainer(for: WWDCSession.self)
+//
+//        return
+//            (ContentView()
+//                .modelContainer(container))
+//
+//    }
+//}

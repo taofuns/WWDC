@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3572DFBF2A6609AD007468A3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3572DFBE2A6609AD007468A3 /* PlayerView.swift */; };
+		3572DFC12A660C32007468A3 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3572DFC02A660C32007468A3 /* PDFView.swift */; };
 		3587C2EE297B290500A63DCA /* ScreenShot.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3587C2ED297B290500A63DCA /* ScreenShot.PNG */; };
 		358DC1C328EF304000CB03A9 /* DetiailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358DC1C228EF304000CB03A9 /* DetiailView.swift */; };
 		35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA0AAF28E9CE7B00C4AA6B /* WWDCApp.swift */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		353A7D5528EA0D0E0009BC7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
+		3572DFBE2A6609AD007468A3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		3572DFC02A660C32007468A3 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		3587C2ED297B290500A63DCA /* ScreenShot.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot.PNG; sourceTree = "<group>"; };
 		358DC1C228EF304000CB03A9 /* DetiailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetiailView.swift; sourceTree = "<group>"; };
 		359956D3290ECC6D0050A9D3 /* WWDC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWDC.entitlements; sourceTree = "<group>"; };
@@ -82,8 +86,10 @@
 				359956D3290ECC6D0050A9D3 /* WWDC.entitlements */,
 				35AA0AB128E9CE7B00C4AA6B /* ContentView.swift */,
 				358DC1C228EF304000CB03A9 /* DetiailView.swift */,
+				3572DFC02A660C32007468A3 /* PDFView.swift */,
 				35AA0AC628E9D01900C4AA6B /* SourceAnalyze.swift */,
 				35AA0AC228E9CEF900C4AA6B /* WebView.swift */,
+				3572DFBE2A6609AD007468A3 /* PlayerView.swift */,
 				35B6AEA729F9BC2E0053693E /* AppSettingsView.swift */,
 				35AA0AC428E9CFA400C4AA6B /* WWDCSource.txt */,
 				35AA0AB328E9CE7C00C4AA6B /* Assets.xcassets */,
@@ -180,9 +186,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3572DFC12A660C32007468A3 /* PDFView.swift in Sources */,
 				35AA0AB228E9CE7B00C4AA6B /* ContentView.swift in Sources */,
 				35B6AEA829F9BC2E0053693E /* AppSettingsView.swift in Sources */,
 				35AA0AC728E9D01900C4AA6B /* SourceAnalyze.swift in Sources */,
+				3572DFBF2A6609AD007468A3 /* PlayerView.swift in Sources */,
 				35AA0AC328E9CEF900C4AA6B /* WebView.swift in Sources */,
 				35FBAB782A5DE5F90093E2A6 /* WWDCSession.swift in Sources */,
 				35AA0AB028E9CE7B00C4AA6B /* WWDCApp.swift in Sources */,

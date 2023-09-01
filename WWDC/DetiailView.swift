@@ -15,6 +15,7 @@ struct DetiailView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.modelContext) private var modelContext
     @State var thisStar = false
+    @State var isShowInspector = false
 
     
     var body: some View {
@@ -40,8 +41,13 @@ struct DetiailView: View {
                 }
             }
         }
+        .inspector(isPresented: $isShowInspector) {
+            // TODO: typing not fluently
+            TextEditor(text: $session.note)
+                .font(.body)
+        }
         .toolbar(content: {
-            ToolbarItem(placement: .navigation) {
+            ToolbarItem(placement: .automatic) {
                 Image(systemName: thisStar ? "star.fill" : "star")
                     .onTapGesture {
                         session.isStared?.toggle()
@@ -65,18 +71,12 @@ struct DetiailView: View {
                             openURL(URL(string: videoUrl)!)
                         }
                 }
-                ToolbarItem(placement: .automatic) {
-                    Image(systemName: "square.and.arrow.down")
-                        .onTapGesture {
-                            if let folderData = UserDefaults.standard.data(forKey: "defaultDownloadFolder"),
-                               let folderURL = URL(dataRepresentation: folderData, relativeTo: nil) {
-                                downloadFile(from: videoUrl, to: folderURL,filename: session.name!,year: session.year!)
-                            } else {
-
-                                print("Default download folder not set")
-                            }
-                        }
-                }
+            }
+            ToolbarItem(placement: .automatic) {
+                Image(systemName: "pencil.and.list.clipboard")
+                    .onTapGesture {
+                        isShowInspector.toggle()
+                    }
             }
 
 
@@ -92,44 +92,44 @@ struct DetiailView: View {
         }
     }
 
-    private func downloadFile(from urlString: String, to folderURL: URL,filename: String,year:String) {
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-
-        let task = URLSession.shared.downloadTask(with: url) { location, response, error in
-            guard let location = location else {
-                print("Download error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-
-            let fileName = filename
-//            let fileExtension = url.pathExtension
-            let subfolderURL = folderURL.appendingPathComponent(year, isDirectory: true)
-
-            do {
-                // 如果子文件夹不存在，创建子文件夹
-                if !FileManager.default.fileExists(atPath: subfolderURL.path) {
-                    try FileManager.default.createDirectory(at: subfolderURL, withIntermediateDirectories: true, attributes: nil)
-                }
-
-                let destinationURL = subfolderURL.appendingPathComponent(fileName)
-
-                // 如果目标路径已经有相同的文件，提示用户文件已存在
-                if FileManager.default.fileExists(atPath: destinationURL.path) {
-                    print("File already exists at \(destinationURL)")
-                } else {
-                    // 将下载的文件保存到指定的文件夹
-                    try FileManager.default.moveItem(at: location, to: destinationURL)
-                    print("File downloaded and saved at \(destinationURL)")
-                }
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-
-        task.resume()
-    }
+//    private func downloadFile(from urlString: String, to folderURL: URL,filename: String,year:String) {
+//        guard let url = URL(string: urlString) else {
+//            print("Invalid URL")
+//            return
+//        }
+//
+//        let task = URLSession.shared.downloadTask(with: url) { location, response, error in
+//            guard let location = location else {
+//                print("Download error: \(error?.localizedDescription ?? "Unknown error")")
+//                return
+//            }
+//
+//            let fileName = filename
+////            let fileExtension = url.pathExtension
+//            let subfolderURL = folderURL.appendingPathComponent(year, isDirectory: true)
+//
+//            do {
+//                // 如果子文件夹不存在，创建子文件夹
+//                if !FileManager.default.fileExists(atPath: subfolderURL.path) {
+//                    try FileManager.default.createDirectory(at: subfolderURL, withIntermediateDirectories: true, attributes: nil)
+//                }
+//
+//                let destinationURL = subfolderURL.appendingPathComponent(fileName)
+//
+//                // 如果目标路径已经有相同的文件，提示用户文件已存在
+//                if FileManager.default.fileExists(atPath: destinationURL.path) {
+//                    print("File already exists at \(destinationURL)")
+//                } else {
+//                    // 将下载的文件保存到指定的文件夹
+//                    try FileManager.default.moveItem(at: location, to: destinationURL)
+//                    print("File downloaded and saved at \(destinationURL)")
+//                }
+//            } catch {
+//                print("Error: \(error.localizedDescription)")
+//            }
+//        }
+//
+//        task.resume()
+//    }
 
 }

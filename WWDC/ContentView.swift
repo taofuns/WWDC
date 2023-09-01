@@ -14,20 +14,10 @@ struct ContentView: View {
     @State private var showStared = false
 
     var body: some View {
-
-
         NavigationSplitView {
-            VStack{
-                YearList(selectedYear: $selectedYear)
+            VStack {
+                YearList(selectedYear: $selectedYear, showStared: $showStared)
                     .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
-                    .toolbar{
-                        ToolbarItem(placement: .automatic) {
-                            Image(systemName: showStared ? "star.fill" : "star")
-                                .onTapGesture {
-                                    showStared.toggle()
-                                }
-                        }
-                    }
                 UpdateView()
             }
 
@@ -36,17 +26,20 @@ struct ContentView: View {
         } detail: {
             Text("no selected")
         }
-
     }
 }
 
 struct YearList: View {
     @Binding var selectedYear: String
+    @Binding var showStared: Bool
+
     let yearList = ["", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007"]
     var body: some View {
         List(selection: $selectedYear) {
-            Section("Bookmark") {
-
+            Section() {
+                Button("\(Image(systemName: showStared ? "star.fill" : "star"))Bookmark") {
+                    showStared.toggle()
+                }.buttonStyle(.plain)
             }
             Section("Year") {
                 ForEach(yearList, id: \.self) { year in
@@ -61,15 +54,15 @@ struct UpdateView: View {
     @Query var wwdcSessions: [WWDCSession]
     @Environment(\.modelContext) private var modelContext
     var body: some View {
-        Text("\(Image(systemName: "goforward")) Reload data")
-            .onTapGesture {
-                for wwdcSession in wwdcSessions {
-                    modelContext.delete(wwdcSession)
-                }
-                //TODO: - can not just upsert
-                getData()
+        Button("\(Image(systemName: "goforward")) Reload data") {
+            for wwdcSession in wwdcSessions {
+                modelContext.delete(wwdcSession)
             }
-            .padding()
+            // TODO: - can not just upsert
+            getData()
+        }
+        .buttonStyle(.borderless)
+        .padding()
     }
 
     func getData() {
@@ -132,7 +125,6 @@ struct ResultList: View {
             if wwdcSessions.isEmpty {
                 getData()
             }
-
         }
     }
 
@@ -195,15 +187,16 @@ struct ResultList: View {
         _wwdcSessions = Query(queryDescriptor)
     }
 }
+
 //
 // #Preview {
 ////    MainActor.assumeIsolated {
 //        ContentView()
 //            .modelContainer(for: WWDCSession.self)
 //    }
-//}
+// }
 
-//#Preview {
+// #Preview {
 //    MainActor.assumeIsolated {
 //        let container = try! ModelContainer(for: WWDCSession.self)
 //
@@ -212,4 +205,4 @@ struct ResultList: View {
 //                .modelContainer(container))
 //
 //    }
-//}
+// }

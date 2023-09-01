@@ -21,7 +21,13 @@ import SwiftData
     var sdURL: String?
     var year: String?
 
-    init(hdURL: String? = nil, idc: UUID? = nil, isStared: Bool? = nil, name: String? = nil, number: String? = nil, pdfURL: String? = nil, preferURL: String? = nil, sdURL: String? = nil, year: String? = nil) {
+    var note: String
+
+    @Attribute(.unique) var sessionID: String {
+        "\(year!)-\(number!)"
+    }
+
+    init(hdURL: String? = nil, idc: UUID? = nil, isStared: Bool? = false, name: String? = nil, number: String? = nil, pdfURL: String? = nil, preferURL: String? = nil, sdURL: String? = nil, year: String? = nil) {
         self.hdURL = hdURL
         self.idc = idc
         self.isStared = isStared
@@ -31,5 +37,6 @@ import SwiftData
         self.preferURL = preferURL
         self.sdURL = sdURL
         self.year = year
+        self.note = ""
     }
 }

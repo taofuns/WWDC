@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var selectedYear = ""
     @State private var showStared = false
-    @State private var showSetting = false
 
     var body: some View {
         NavigationView {
@@ -20,12 +19,6 @@ struct ContentView: View {
                 ResultList(filter: searchText, year: selectedYear, showStared: $showStared)
             }
             .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Image(systemName: "gear")
-                        .onTapGesture {
-                            showSetting.toggle()
-                        }
-                }
                 ToolbarItem(placement: .automatic) {
                     YearList(selectedYear: $selectedYear)
                 }
@@ -39,11 +32,6 @@ struct ContentView: View {
             }
             .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
             .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
-            #if os(macOS)
-            .sheet(isPresented: $showSetting) {
-                AppSettingsView()
-            }
-            #endif
         }
     }
 }
@@ -101,13 +89,13 @@ struct ResultList: View {
         }
 
         .onAppear {
-            if wwdcSessions.isEmpty {
-                getData()
-            }
-//            for wwdcSession in wwdcSessions {
-//                modelContext.delete(object: wwdcSession)
+//            if wwdcSessions.isEmpty {
+//                getData()
 //            }
-//            getData()
+            for wwdcSession in wwdcSessions {
+                modelContext.delete(wwdcSession)
+            }
+            getData()
         }
     }
 
@@ -124,7 +112,7 @@ struct ResultList: View {
                 wwdcSession.hdURL = session.hdURL
                 wwdcSession.pdfURL = session.pdfURL
                 wwdcSession.preferURL = session.preferURL
-                modelContext.insert(object: wwdcSession)
+                modelContext.insert(wwdcSession)
             }
         } catch {
             print("Unexpected error: \(error)")
@@ -145,7 +133,7 @@ struct ResultList: View {
                 if filter.isEmpty {
                 } else {
                     let predicate = #Predicate<WWDCSession> { session in
-                        session.name?.contains(filter) ?? false
+                        session.name?.localizedStandardContains(filter) ?? false
                     }
 
                     queryDescriptor.predicate = predicate
@@ -160,7 +148,7 @@ struct ResultList: View {
 
                 } else {
                     let predicate = #Predicate<WWDCSession> { session in
-                        (session.name?.contains(filter) ?? false) && (session.year == year)
+                        (session.name?.localizedStandardContains(filter) ?? false) && (session.year == year)
                     }
 
                     queryDescriptor.predicate = predicate

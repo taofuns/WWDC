@@ -30,11 +30,13 @@ struct DetiailView: View {
             
             if currentPage == "VIDEO" {
                 if let videoUrl = session.preferURL, let url = URL(string: videoUrl) {
-                    PlayerView(url: url)
+//                    PlayerView(url: url)
+                    WebView(url: url)
                 }
             } else {
                 if let pdfUrl = session.pdfURL, let url = URL(string: pdfUrl) {
-                    PDFPresentView(url: url)
+//                    PDFPresentView(url: url)
+                    WebView(url: url)
                 }
             }
         }

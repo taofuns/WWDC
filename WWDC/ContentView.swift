@@ -14,25 +14,29 @@ struct ContentView: View {
     @State private var showStared = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ResultList(filter: searchText, year: selectedYear, showStared: $showStared)
-            }
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    YearList(selectedYear: $selectedYear)
-                }
 
-                ToolbarItem(placement: .automatic) {
-                    Image(systemName: showStared ? "star.fill" : "star")
-                        .onTapGesture {
-                            showStared.toggle()
+
+        NavigationSplitView {
+            VStack{
+                YearList(selectedYear: $selectedYear)
+                    .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
+                    .toolbar{
+                        ToolbarItem(placement: .automatic) {
+                            Image(systemName: showStared ? "star.fill" : "star")
+                                .onTapGesture {
+                                    showStared.toggle()
+                                }
                         }
-                }
+                    }
+                UpdateView()
             }
-            .navigationTitle(selectedYear == "" ? "WWDC" : "WWDC \(selectedYear)")
-            .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
+
+        } content: {
+            ResultList(filter: searchText, year: selectedYear, showStared: $showStared)
+        } detail: {
+            Text("no selected")
         }
+
     }
 }
 
@@ -40,12 +44,51 @@ struct YearList: View {
     @Binding var selectedYear: String
     let yearList = ["", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007"]
     var body: some View {
-        HStack(spacing: 0) {
-            Picker("Year", selection: $selectedYear) {
+        List(selection: $selectedYear) {
+            Section("Bookmark") {
+
+            }
+            Section("Year") {
                 ForEach(yearList, id: \.self) { year in
                     Text(year != "" ? year : "All Year")
                 }
             }
+        }
+    }
+}
+
+struct UpdateView: View {
+    @Query var wwdcSessions: [WWDCSession]
+    @Environment(\.modelContext) private var modelContext
+    var body: some View {
+        Text("\(Image(systemName: "goforward")) Reload data")
+            .onTapGesture {
+                for wwdcSession in wwdcSessions {
+                    modelContext.delete(wwdcSession)
+                }
+                //TODO: - can not just upsert
+                getData()
+            }
+            .padding()
+    }
+
+    func getData() {
+        do {
+            let sessions = try SourceAnalyze.getData(fromSource: SourceAnalyze.source)
+            for session in sessions {
+                let wwdcSession = WWDCSession()
+                wwdcSession.idc = session.id
+                wwdcSession.year = session.year
+                wwdcSession.number = session.number
+                wwdcSession.name = session.name
+                wwdcSession.sdURL = session.sdURL
+                wwdcSession.hdURL = session.hdURL
+                wwdcSession.pdfURL = session.pdfURL
+                wwdcSession.preferURL = session.preferURL
+                modelContext.insert(wwdcSession)
+            }
+        } catch {
+            print("Unexpected error: \(error)")
         }
     }
 }
@@ -83,19 +126,13 @@ struct ResultList: View {
                         .lineLimit(5)
                 }
             }
-            .onAppear {
-                print("wwdc\(wwdcSession.year ?? "")-\(wwdcSession.number ?? "")\(wwdcSession.name ?? "unkonow")")
-            }
         }
 
         .onAppear {
-//            if wwdcSessions.isEmpty {
-//                getData()
-//            }
-            for wwdcSession in wwdcSessions {
-                modelContext.delete(wwdcSession)
+            if wwdcSessions.isEmpty {
+                getData()
             }
-            getData()
+
         }
     }
 

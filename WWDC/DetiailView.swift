@@ -43,8 +43,9 @@ struct DetiailView: View {
         }
         .inspector(isPresented: $isShowInspector) {
             // TODO: typing not fluently
-            TextEditor(text: $session.note)
-                .font(.body)
+//            TextEditor(text: $session.note)
+//                .font(.body)
+            WWDCNotesView(session: session)
         }
         .toolbar(content: {
             ToolbarItem(placement: .automatic) {

@@ -10,19 +10,28 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var searchText = ""
-    @State private var selectedYear = ""
+    @State private var selectedYear: String?
     @State private var showStared = false
 
     var body: some View {
         NavigationSplitView {
             VStack {
                 YearList(selectedYear: $selectedYear, showStared: $showStared)
-                    .searchable(text: $searchText, prompt: selectedYear == "" ? "Search session in all year" : "Search session in \(selectedYear)")
                 UpdateView()
             }
+            .navigationTitle("WWDC Pro")
 
         } content: {
-            ResultList(filter: searchText, year: selectedYear, showStared: $showStared)
+            if let selectedYear {
+                ResultList(filter: searchText, year: selectedYear, showStared: $showStared)
+                    .searchable(text: $searchText, prompt: selectedYear != "" ?  "Search session in \(selectedYear)" : "Search session in all year")
+                    .navigationTitle("Sessions \(selectedYear)")
+            } else {
+                ResultList(filter: searchText, year: "", showStared: $showStared)
+                    .searchable(text: $searchText, prompt: "search from bookmark")
+                    .navigationTitle("Bookmark")
+            }
+
         } detail: {
             Text("no selected")
         }
@@ -30,11 +39,12 @@ struct ContentView: View {
 }
 
 struct YearList: View {
-    @Binding var selectedYear: String
+    @Binding var selectedYear: String?
     @Binding var showStared: Bool
 
     let yearList = ["", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007"]
     var body: some View {
+
         List(selection: $selectedYear) {
             Section() {
                 Button("\(Image(systemName: showStared ? "star.fill" : "star"))Bookmark") {
@@ -47,6 +57,7 @@ struct YearList: View {
                 }
             }
         }
+
     }
 }
 

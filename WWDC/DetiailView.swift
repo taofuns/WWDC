@@ -46,6 +46,7 @@ struct DetiailView: View {
 //            TextEditor(text: $session.note)
 //                .font(.body)
             WWDCNotesView(session: session)
+                .inspectorColumnWidth(ideal: 400.0)
         }
         .toolbar(content: {
             ToolbarItem(placement: .automatic) {
